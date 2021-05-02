@@ -1,2 +1,2 @@
 # sonaremin-ng
-sonaremin next generation :)
+sonaremin next generation :) - this is work in progress and does not work yet ...

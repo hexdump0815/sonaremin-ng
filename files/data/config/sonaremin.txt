@@ -1,0 +1,57 @@
+# a line beginning with a # is treated as comment und thus not used
+# comment out the settings you want and uncomment the ones not wanted
+
+# start with a hdmi monitor connected (display) or virtual
+DISPLAY_MODE=display
+#DISPLAY_MODE=virtual
+#DISPLAY_MODE=headless
+
+# default keyboard language for display mode, default is us and it
+# should be a valid argument to setxkbmap like fr, de, it, pt, ru, es etc.
+#XKB_LANGUAGE=de
+
+# enable tuning for audio usage
+AUDIO_TUNE=yes
+#AUDIO_TUNE=no
+
+# samplerate used by jack and vcvrack
+# possible values: 22050, 32000 (default), 44100, 48000
+#SAMPLE_RATE="22050"
+
+# start qjackctl automatically
+QJACKCTL_START=yes
+#QJACKCTL_START=no
+
+# start jackd in network mode
+#JACKD_NET=yes
+JACKD_NET=no
+
+# if jackd is running in network mode:
+# number of midi (1-8) and audio (2,4,6,8) in and out channels
+JACKD_NET_MIDI_IN=4
+JACKD_NET_MIDI_OUT=4
+JACKD_NET_AUDIO_IN=2
+JACKD_NET_AUDIO_OUT=2
+
+# start rtpmidi server for midi over network
+#RTPMIDI=yes
+RTPMIDI=no
+
+# start samba server to access /data via network
+#SAMBA_SERVER=yes
+SAMBA_SERVER=no
+
+# start vcvrack automatically - you should either select this or the *thv1 below
+VCVRACK_START=yes
+#VCVRACK_START=no
+
+# which vcvrack version to start automativally
+VCVRACK_VERSION=v1
+
+# set rt prio scheduling for vcvrack and jack a moment after starting them
+REALTIME_PRIORITY_V1=yes
+#REALTIME_PRIORITY_V1=no
+
+# reset the v1 realtime prio setting on startup as it might result in system hangs
+RESET_REALTIME=yes
+#RESET_REALTIME=no
