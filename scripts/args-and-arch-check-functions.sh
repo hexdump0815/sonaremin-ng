@@ -5,7 +5,7 @@ if [ "$#" != "2" ]; then
   echo "usage: $0 system arch"
   echo ""
   echo "possible system options:"
-  for i in $(ls ${IMAGEBUILDER}/systems | grep 'amlogic_gx|odroid_u3|raspberry_pi_3|raspberry_pi_4'); do
+  for i in $(ls ${IMAGEBUILDER}/systems | grep -E 'amlogic_gx|odroid_u3|raspberry_pi_3|raspberry_pi_4'); do
     echo -n "- "$i" - "; cat ${IMAGEBUILDER}/systems/$i/arch.txt
   done
   echo ""

@@ -8,9 +8,9 @@ export S_DOWNLOAD_DIR=/compile/local/sonaremin-download
 
 if [ -d ${S_BUILD_ROOT} ]; then
   echo ""
-  echo "S_BUILD_ROOT ${S_BUILD_ROOT} alresdy exists - giving up for safety reasons ..."
+  echo "S_BUILD_ROOT ${S_BUILD_ROOT} already exists - giving up for safety reasons ..."
   echo ""
-  exit 1
+#  exit 1
 fi
 
 if [ ! -d ${S_DOWNLOAD_DIR} ]; then
