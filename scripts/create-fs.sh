@@ -132,6 +132,7 @@ tar --numeric-owner -xzf ${S_DOWNLOAD_DIR}/opt-xrdp-focal-${2}.tar.gz
 # unpack this before the extra-files as they bring an adapted config
 tar --numeric-owner -xzf ${S_DOWNLOAD_DIR}/xorgxrdp-focal-${2}.tar.gz
 tar --numeric-owner -xzf ${S_DOWNLOAD_DIR}/opt-raveloxmidi-focal-${2}.tar.gz
+tar --numeric-owner -xzf ${S_DOWNLOAD_DIR}/opt-mesa-focal-${2}.tar.gz
 
 if [ -d ${WORKDIR}/files/extra-files ]; then
   ( cd ${WORKDIR}/files/extra-files ; tar cf - . ) | tar xhf -

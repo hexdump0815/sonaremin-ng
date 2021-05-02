@@ -30,6 +30,7 @@ vcvrack_v1_release_version="v1.1.6_10"
 raveloxmidi_release_version="0.10.3"
 xrdp_release_version="0.9.16"
 xorgxrdp_release_version="0.2.16"
+mesa_release_version="21.0.1"
 
 # get precompiled vcvrack
 if [ "$1" = "all" ] || [ "$1" = "armv7l" ]; then
@@ -58,4 +59,13 @@ fi
 if [ "$1" = "all" ] || [ "$1" = "aarch64" ]; then
   wget https://github.com/hexdump0815/xrdp-xorgxrdp-build/releases/download/xrdp-v${xrdp_release_version}/opt-xrdp-${xrdp_release_version}-focal-aarch64.tar.gz -O ${S_DOWNLOAD_DIR}/opt-xrdp-focal-aarch64.tar.gz
   wget https://github.com/hexdump0815/xrdp-xorgxrdp-build/releases/download/xorgxrdp-v${xorgxrdp_release_version}/xorgxrdp-${xorgxrdp_release_version}-focal-aarch64.tar.gz -O ${S_DOWNLOAD_DIR}/xorgxrdp-focal-aarch64.tar.gz
+fi
+
+# get precompiled newer mesa
+if [ "$1" = "all" ] || [ "$1" = "armv7l" ]; then
+  wget https://github.com/hexdump0815/mesa-etc-build/releases/download/${mesa_release_version}/opt-mesa-${mesa_release_version}-focal-armv7l.tar.gz -O ${S_DOWNLOAD_DIR}/opt-mesa-focal-armv7l.tar.gz
+fi
+
+if [ "$1" = "all" ] || [ "$1" = "aarch64" ]; then
+  wget https://github.com/hexdump0815/mesa-etc-build/releases/download/${mesa_release_version}/opt-mesa-${mesa_release_version}-focal-aarch64.tar.gz -O ${S_DOWNLOAD_DIR}/opt-mesa-focal-aarch64.tar.gz
 fi

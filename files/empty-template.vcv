@@ -1,0 +1,27 @@
+{
+  "version": "1.1.6",
+  "modules": [
+    {
+      "id": 0,
+      "plugin": "Core",
+      "version": "1.1.6",
+      "model": "AudioInterface",
+      "params": [],
+      "data": {
+        "audio": {
+          "driver": 4,
+          "deviceName": "system",
+          "offset": 0,
+          "maxChannels": 8,
+          "sampleRate": 32000,
+          "blockSize": 256
+        }
+      },
+      "pos": [
+        0,
+        0
+      ]
+    }
+  ],
+  "cables": []
+}
