@@ -77,7 +77,7 @@ date
 echo "done"
 echo ""
 
-cp ${WORKDIR}/scripts/create-chroot-02.sh ${S_BUILD_ROOT}
+cp ${WORKDIR}/scripts/create-chroot-stage-02.sh ${S_BUILD_ROOT}
 
 mount -o bind /dev ${S_BUILD_ROOT}/dev
 mount -o bind /dev/pts ${S_BUILD_ROOT}/dev/pts
@@ -87,7 +87,7 @@ mount -t proc /proc ${S_BUILD_ROOT}/proc
 #cp /proc/mounts ${S_BUILD_ROOT}/etc/mtab  
 #cp /etc/resolv.conf ${S_BUILD_ROOT}/etc/resolv.conf 
 
-chroot ${S_BUILD_ROOT} /create-chroot-02.sh
+chroot ${S_BUILD_ROOT} /create-chroot-stage-02.sh
 
 cd ${S_BUILD_ROOT}/
 

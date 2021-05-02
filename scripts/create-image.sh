@@ -27,71 +27,57 @@ export DOWNLOAD_DIR=/compile/local/imagebuilder-download
 export S_IMAGE_DIR=/compile/local/sonaremin-diskimage
 export S_MOUNT_POINT=/tmp/sonaremin-mnt
 
-# check that everything is there and set
-if [ ! -f systems/${1}/mbr-partitions.txt ] && [ ! -f systems/${1}/gpt-partitions.txt ]; then
-  echo ""
-  echo "systems/${1}/mbr-partitions.txt or systems/${1}/gpt-partitions.txt does not exist - giving up"
-  echo ""
-  exit 1
-fi
-if [ ! -f systems/${1}/partition-mapping.txt ]; then
-  echo ""
-  echo "systems/${1}/partition-mapping.txt does not exist - giving up"
-  echo ""
-  exit 1
+# get partition mapping info
+. files/partition-mapping.txt
+# check that all required variables are set
+if [ "$BOOTFS" != "" ]; then
+  echo "BOOTFS=$BOOTFS"
 else
-  # get partition mapping info
-  . systems/${1}/partition-mapping.txt
-  # check that all required variables are set
-  if [ "$BOOTFS" != "" ]; then
-    echo "BOOTFS=$BOOTFS"
-  else
+  echo ""
+  echo "BOOTFS is not set in files/partition-mapping.txt - giving up"
+  echo ""
+  exit
+fi
+if [ "$ROOTFS" != "" ]; then
+  echo "ROOTFS=$ROOTFS"
+else
+  echo ""
+  echo "ROOTFS is not set in files/partition-mapping.txt - giving up"
+  echo ""
+  exit
+fi
+# TODO: the btrfs code is in here for later experiments with it, but its not used
+#       for the sonaremin yet
+if [ "$ROOTFS" = "btrfs" ]; then
+  if [ ! -x /bin/mkfs.btrfs ]; then
     echo ""
-    echo "BOOTFS is not set in systems/${1}/partition-mapping.txt - giving up"
+    echo "/bin/mkfs.btrfs is not available - please install the btrfs-progs package"
     echo ""
-    exit
+    exit 1
   fi
-  if [ "$ROOTFS" != "" ]; then
-    echo "ROOTFS=$ROOTFS"
-  else
-    echo ""
-    echo "ROOTFS is not set in systems/${1}/partition-mapping.txt - giving up"
-    echo ""
-    exit
-  fi
-  # TODO: the btrfs code is in here for later experiments with it, but its not used
-  #       for the sonaremin yet
-  if [ "$ROOTFS" = "btrfs" ]; then
-    if [ ! -x /bin/mkfs.btrfs ]; then
-      echo ""
-      echo "/bin/mkfs.btrfs is not available - please install the btrfs-progs package"
-      echo ""
-      exit 1
-    fi
-  fi
-  if [ "$BOOTPART" != "" ]; then
-    echo "BOOTPART=$BOOTPART"
-  else
-    echo ""
-    echo "BOOTPART is not set in systems/${1}/partition-mapping.txt - giving up"
-    echo ""
-    exit
-  fi
-  if [ "$ROOTPART" != "" ]; then
-    echo "ROOTPART=$ROOTPART"
-  else
-    echo ""
-    echo "ROOTPART is not set in systems/${1}/partition-mapping.txt - giving up"
-    echo ""
-    exit
-  fi
-  if [ "$SWAPPART" != "" ]; then
-    echo "SWAPPART=$SWAPPART"
-  else
-    echo ""
-    echo "INFO: SWAPPART is not set in systems/${1}/partition-mapping.txt - this is ok"
-    echo ""
-  fi
+fi
+if [ "$BOOTPART" != "" ]; then
+  echo "BOOTPART=$BOOTPART"
+else
+  echo ""
+  echo "BOOTPART is not set in files/partition-mapping.txt - giving up"
+  echo ""
+  exit
+fi
+if [ "$ROOTPART" != "" ]; then
+  echo "ROOTPART=$ROOTPART"
+else
+  echo ""
+  echo "ROOTPART is not set in files/partition-mapping.txt - giving up"
+  echo ""
+  exit
+fi
+if [ "$SWAPPART" != "" ]; then
+  echo "SWAPPART=$SWAPPART"
+else
+  echo ""
+  echo "INFO: SWAPPART is not set in files/partition-mapping.txt - this is ok"
+  echo ""
 fi
 
 mkdir -p ${S_IMAGE_DIR}
@@ -138,10 +124,10 @@ else
   mkfs -t ext4 -O ^has_journal -m 2 -L rootpart /dev/loop0p$ROOTPART
   mount /dev/loop0p$ROOTPART ${S_MOUNT_POINT}
 fi
-mkdir ${MOUNT_POINT}/boot
-mount /dev/loop0p$BOOTPART ${MOUNT_POINT}/boot
-mkdir ${MOUNT_POINT}/data
-mount /dev/loop0p$DATAPART ${MOUNT_POINT}/data
+mkdir ${S_MOUNT_POINT}/boot
+mount /dev/loop0p$BOOTPART ${S_MOUNT_POINT}/boot
+mkdir ${S_MOUNT_POINT}/data
+mount /dev/loop0p$DATAPART ${S_MOUNT_POINT}/data
 
 echo "copying over the root fs to the target image - this may take a while ..."
 date
