@@ -18,6 +18,8 @@ else
   exit 1
 fi
 
+cd ${WORKDIR}
+
 . scripts/args-and-arch-check-functions.sh
 
 export S_BUILD_ROOT=/compile/local/sonaremin-root
