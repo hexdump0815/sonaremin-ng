@@ -6,7 +6,7 @@ Description=raveloxmidi RTP-MIDI network server
 WantedBy=multi-user.target
 
 [Service]
-ExecStart=/opt/rtpmidi/raveloxmidi -dN -c /opt/rtpmidi/raveloxmidi.conf
+ExecStart=/opt/raveloxmidi/bin/raveloxmidi -dN -c /opt/raveloxmidi/etc/raveloxmidi.conf
 
 Type=simple
 Restart=always

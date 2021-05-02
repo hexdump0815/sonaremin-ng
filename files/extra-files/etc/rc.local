@@ -102,8 +102,9 @@ sed "s,Virtual Raw MIDI .-0,Virtual Raw MIDI $MY_VIRMIDI-0,g;s,VirMIDI .-0,VirMI
 
 # start raveloxmidi rtpmidi server
 if [ "$RTPMIDI" = "yes" ]; then
-  sed "s,__HOSTNAME__,$MY_HOSTNAME,g" /data/config/rtpmidi/raveloxmidi.conf > /opt/rtpmidi/raveloxmidi.conf
-  sed "s/= hw:.,/= hw:$MY_VIRMIDI,/g" -i /opt/rtpmidi/raveloxmidi.conf
+  mkdir -p /opt/raveloxmidi/etc
+  sed "s,__HOSTNAME__,$MY_HOSTNAME,g" /data/config/rtpmidi/raveloxmidi.conf > /opt/raveloxmidi/etc/raveloxmidi.conf
+  sed "s/= hw:.,/= hw:$MY_VIRMIDI,/g" -i /opt/raveloxmidi/etc/raveloxmidi.conf
   ( systemctl start avahi-daemon ; sleep 15 ; systemctl start raveloxmidi ) &
 fi
 

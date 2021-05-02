@@ -42,20 +42,20 @@ fi
 
 # get precompiled raveloxmidi
 if [ "$1" = "all" ] || [ "$1" = "armv7l" ]; then
-  wget https://github.com/hexdump0815/raveloxmidi-build/releases/download/${raveloxmidi_release_version}/opt-raveloxmidi-v${raveloxmidi_release_version}-focal-armv7l.tar.gz ${S_DOWNLOAD_DIR}/opt-raveloxmidi-focal-armv7l.tar.gz
+  wget https://github.com/hexdump0815/raveloxmidi-build/releases/download/v${raveloxmidi_release_version}/opt-raveloxmidi-${raveloxmidi_release_version}-focal-armv7l.tar.gz -O ${S_DOWNLOAD_DIR}/opt-raveloxmidi-focal-armv7l.tar.gz
 fi
 
 if [ "$1" = "all" ] || [ "$1" = "aarch64" ]; then
-  wget https://github.com/hexdump0815/raveloxmidi-build/releases/download/${raveloxmidi_release_version}/opt-raveloxmidi-v${raveloxmidi_release_version}-focal-aarch64.tar.gz ${S_DOWNLOAD_DIR}/opt-raveloxmidi-focal-aarch64.tar.gz
+  wget https://github.com/hexdump0815/raveloxmidi-build/releases/download/v${raveloxmidi_release_version}/opt-raveloxmidi-${raveloxmidi_release_version}-focal-aarch64.tar.gz -O ${S_DOWNLOAD_DIR}/opt-raveloxmidi-focal-aarch64.tar.gz
 fi
 
 # get precompiled xrdp and xorgxrdp
 if [ "$1" = "all" ] || [ "$1" = "armv7l" ]; then
-  wget https://github.com/hexdump0815/xrdp-xorgxrdp-build/releases/download/xrdp-v${xrdp_release_version}/opt-xrdp-${xrdp_release_version}-focal-armv7l.tar.gz ${S_DOWNLOAD_DIR}/opt-xrdp-focal-armv7l.tar.gz
-  wget https://github.com/hexdump0815/xrdp-xorgxrdp-build/releases/download/xorgxrdp-v${xorgxrdp_release_version}/xorgxrdp-${xorgxrdp_release_version}-focal-armv7l.tar.gz ${S_DOWNLOAD_DIR}/xorgxrdp-focal-armv7l.tar.gz
+  wget https://github.com/hexdump0815/xrdp-xorgxrdp-build/releases/download/xrdp-v${xrdp_release_version}/opt-xrdp-${xrdp_release_version}-focal-armv7l.tar.gz -O ${S_DOWNLOAD_DIR}/opt-xrdp-focal-armv7l.tar.gz
+  wget https://github.com/hexdump0815/xrdp-xorgxrdp-build/releases/download/xorgxrdp-v${xorgxrdp_release_version}/xorgxrdp-${xorgxrdp_release_version}-focal-armv7l.tar.gz -O ${S_DOWNLOAD_DIR}/xorgxrdp-focal-armv7l.tar.gz
 fi
 
 if [ "$1" = "all" ] || [ "$1" = "aarch64" ]; then
-  wget https://github.com/hexdump0815/xrdp-xorgxrdp-build/releases/download/xrdp-v${xrdp_release_version}/opt-xrdp-${xrdp_release_version}-focal-aarch64.tar.gz ${S_DOWNLOAD_DIR}/opt-xrdp-focal-aarch64.tar.gz
-  wget https://github.com/hexdump0815/xrdp-xorgxrdp-build/releases/download/xorgxrdp-v${xorgxrdp_release_version}/xorgxrdp-${xorgxrdp_release_version}-focal-aarch64.tar.gz ${S_DOWNLOAD_DIR}/xorgxrdp-focal-aarch64.tar.gz
+  wget https://github.com/hexdump0815/xrdp-xorgxrdp-build/releases/download/xrdp-v${xrdp_release_version}/opt-xrdp-${xrdp_release_version}-focal-aarch64.tar.gz -O ${S_DOWNLOAD_DIR}/opt-xrdp-focal-aarch64.tar.gz
+  wget https://github.com/hexdump0815/xrdp-xorgxrdp-build/releases/download/xorgxrdp-v${xorgxrdp_release_version}/xorgxrdp-${xorgxrdp_release_version}-focal-aarch64.tar.gz -O ${S_DOWNLOAD_DIR}/xorgxrdp-focal-aarch64.tar.gz
 fi
