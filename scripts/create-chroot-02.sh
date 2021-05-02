@@ -13,16 +13,13 @@ systemctl disable smbd
 systemctl disable nmbd
 systemctl disable avahi-daemon
 systemctl disable fstrim.timer
-systemctl disable fwupd.service
-systemctl disable fwupd-refresh.service
 
-# TODO: not sure if the first two are still required
 systemctl disable apt-daily
 systemctl disable apt-daily-upgrade
 systemctl disable apt-daily-upgrade.timer
-systemctl disable unattended-upgrades.service
-sed -i 's,Update-Package-Lists "1",Update-Package-Lists "0",g' /etc/apt/apt.conf.d/10periodic
-sed -i 's,Update-Package-Lists "1",Update-Package-Lists "0",g;s,Unattended-Upgrade "1",Unattended-Upgrade "0",g' /etc/apt/apt.conf.d/20auto-upgrades
+# TODO: those files do not seem to exist ...
+#sed -i 's,Update-Package-Lists "1",Update-Package-Lists "0",g' /etc/apt/apt.conf.d/10periodic
+#sed -i 's,Update-Package-Lists "1",Update-Package-Lists "0",g;s,Unattended-Upgrade "1",Unattended-Upgrade "0",g' /etc/apt/apt.conf.d/20auto-upgrades
 
 systemctl mask alsa-restore.service
 systemctl mask alsa-state.service

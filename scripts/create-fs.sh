@@ -10,7 +10,7 @@ if [ -d ${S_BUILD_ROOT} ]; then
   echo ""
   echo "S_BUILD_ROOT ${S_BUILD_ROOT} already exists - giving up for safety reasons ..."
   echo ""
-#  exit 1
+  exit 1
 fi
 
 if [ ! -d ${S_DOWNLOAD_DIR} ]; then
@@ -48,8 +48,8 @@ if [ ! -d ${DOWNLOAD_DIR} ]; then
   exit 1
 fi
 
-if [ "${1}" != $(cat ${DOWNLOAD_DIR}/system.txt)" ] || \
-   [ "${2}" != $(cat ${DOWNLOAD_DIR}/arch.txt)" ] || \
+if [ "${1}" != "$(cat ${DOWNLOAD_DIR}/system.txt)" ] || \
+   [ "${2}" != "$(cat ${DOWNLOAD_DIR}/arch.txt)" ] || \
    [ "focal" != "$(cat ${DOWNLOAD_DIR}/release.txt)" ]; then
   echo ""
   echo "system and arch given on the cmdline (${1} ${2}) plus release=focal"
@@ -93,11 +93,11 @@ cd ${S_BUILD_ROOT}/
 
 rm -f create-chroot-stage-0?.sh
 
-tar --numeric-owner -xhzf ${IMAGEBUILDER}/downloads/kernel-${1}-${2}.tar.gz
+tar --numeric-owner -xhzf ${DOWNLOAD_DIR}/kernel-${1}-${2}.tar.gz
 
-if [ -d ${IMAGEBUILDER}/boot-extra-${1} ]; then
+if [ -d ${DOWNLOAD_DIR}/boot-extra-${1} ]; then
   mkdir -p boot/extra
-  cp -r ${IMAGEBUILDER}/boot-extra-${1}/* boot/extra
+  cp -r ${DOWNLOAD_DIR}/boot-extra-${1}/* boot/extra
 fi
 
 # the sonaremin uses syslinux with /boot/menu as dir - so remove /boot/extlinux and add /boot/menu per system
@@ -128,10 +128,10 @@ if [ -d ${IMAGEBUILDER}/systems/${1}/extra-files-${2}-focal ]; then
   ( cd ${IMAGEBUILDER}/systems/${1}/extra-files-${2}-focal ; tar cf - . ) | tar xhf -
 fi
 
-tar --numeric-owner -xzf ${S_DOWNLOAD_DIR}/files/xrdp-focal-${2}.tar.gz
+tar --numeric-owner -xzf ${S_DOWNLOAD_DIR}/opt-xrdp-focal-${2}.tar.gz
 # unpack this before the extra-files as they bring an adapted config
-tar --numeric-owner -xzf ${S_DOWNLOAD_DIR}/files/xorgxrdp-focal-${2}.tar.gz
-tar --numeric-owner -xzf ${S_DOWNLOAD_DIR}/files/raveloxmidi-focal-${2}.tar.gz
+tar --numeric-owner -xzf ${S_DOWNLOAD_DIR}/xorgxrdp-focal-${2}.tar.gz
+tar --numeric-owner -xzf ${S_DOWNLOAD_DIR}/opt-raveloxmidi-focal-${2}.tar.gz
 
 if [ -d ${WORKDIR}/files/extra-files ]; then
   ( cd ${WORKDIR}/files/extra-files ; tar cf - . ) | tar xhf -
@@ -209,7 +209,7 @@ cp config/vcvrack-v1/settings.json config/vcvrack-v1/backup/settings.json
 
 cd ${S_BUILD_ROOT}
 cd home/sonaremin
-tar --numeric-owner -xzf ${S_DOWNLOAD_DIR}/downloads/vcvrack.${2}-v1.tar.gz
+tar --numeric-owner -xzf ${S_DOWNLOAD_DIR}/vcvrack.${2}-v1.tar.gz
 mv vcvrack.${2}-v1 vcvrack-v1
 rm -f vcvrack-v1/settings.json vcvrack-v1/autosave.vcv vcvrack-v1/template.vcv
 ln -s /data/config/vcvrack-v1/settings.json vcvrack-v1/settings.json
