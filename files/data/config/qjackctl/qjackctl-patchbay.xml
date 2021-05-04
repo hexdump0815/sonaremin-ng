@@ -16,28 +16,28 @@
   <socket exclusive="off" client="WORLDE MINI" type="alsa-midi" name="WORLDE MINI">
    <plug>WORLDE MINI MIDI 1</plug>
   </socket>
-  <socket exclusive="off" client="VCV Rack-01" type="jack-audio" name="VCV Rack audio out 1">
+  <socket exclusive="off" client="VCV Rack" type="jack-audio" name="VCV Rack audio out 1">
    <plug>outport 0</plug>
   </socket>
-  <socket exclusive="off" client="VCV Rack-01" type="jack-audio" name="VCV Rack audio out 2">
+  <socket exclusive="off" client="VCV Rack" type="jack-audio" name="VCV Rack audio out 2">
    <plug>outport 1</plug>
   </socket>
-  <socket exclusive="off" client="VCV Rack-01" type="jack-audio" name="VCV Rack audio out 3">
+  <socket exclusive="off" client="VCV Rack" type="jack-audio" name="VCV Rack audio out 3">
    <plug>outport 2</plug>
   </socket>
-  <socket exclusive="off" client="VCV Rack-01" type="jack-audio" name="VCV Rack audio out 4">
+  <socket exclusive="off" client="VCV Rack" type="jack-audio" name="VCV Rack audio out 4">
    <plug>outport 3</plug>
   </socket>
-  <socket exclusive="off" client="VCV Rack-01" type="jack-audio" name="VCV Rack audio out 5">
+  <socket exclusive="off" client="VCV Rack" type="jack-audio" name="VCV Rack audio out 5">
    <plug>outport 4</plug>
   </socket>
-  <socket exclusive="off" client="VCV Rack-01" type="jack-audio" name="VCV Rack audio out 6">
+  <socket exclusive="off" client="VCV Rack" type="jack-audio" name="VCV Rack audio out 6">
    <plug>outport 5</plug>
   </socket>
-  <socket exclusive="off" client="VCV Rack-01" type="jack-audio" name="VCV Rack audio out 7">
+  <socket exclusive="off" client="VCV Rack" type="jack-audio" name="VCV Rack audio out 7">
    <plug>outport 6</plug>
   </socket>
-  <socket exclusive="off" client="VCV Rack-01" type="jack-audio" name="VCV Rack audio out 8">
+  <socket exclusive="off" client="VCV Rack" type="jack-audio" name="VCV Rack audio out 8">
    <plug>outport 7</plug>
   </socket>
   <socket exclusive="off" client="system" type="jack-audio" name="System in 1">
@@ -99,28 +99,28 @@
   <socket exclusive="off" client="system" type="jack-audio" name="System out 8">
    <plug>playback_8</plug>
   </socket>
-  <socket exclusive="off" client="VCV Rack-01" type="jack-audio" name="VCV Rack audio in 1">
+  <socket exclusive="off" client="VCV Rack" type="jack-audio" name="VCV Rack audio in 1">
    <plug>inport 0</plug>
   </socket>
-  <socket exclusive="off" client="VCV Rack-01" type="jack-audio" name="VCV Rack audio in 2">
+  <socket exclusive="off" client="VCV Rack" type="jack-audio" name="VCV Rack audio in 2">
    <plug>inport 1</plug>
   </socket>
-  <socket exclusive="off" client="VCV Rack-01" type="jack-audio" name="VCV Rack audio in 3">
+  <socket exclusive="off" client="VCV Rack" type="jack-audio" name="VCV Rack audio in 3">
    <plug>inport 2</plug>
   </socket>
-  <socket exclusive="off" client="VCV Rack-01" type="jack-audio" name="VCV Rack audio in 4">
+  <socket exclusive="off" client="VCV Rack" type="jack-audio" name="VCV Rack audio in 4">
    <plug>inport 3</plug>
   </socket>
-  <socket exclusive="off" client="VCV Rack-01" type="jack-audio" name="VCV Rack audio in 5">
+  <socket exclusive="off" client="VCV Rack" type="jack-audio" name="VCV Rack audio in 5">
    <plug>inport 4</plug>
   </socket>
-  <socket exclusive="off" client="VCV Rack-01" type="jack-audio" name="VCV Rack audio in 6">
+  <socket exclusive="off" client="VCV Rack" type="jack-audio" name="VCV Rack audio in 6">
    <plug>inport 5</plug>
   </socket>
-  <socket exclusive="off" client="VCV Rack-01" type="jack-audio" name="VCV Rack audio in 7">
+  <socket exclusive="off" client="VCV Rack" type="jack-audio" name="VCV Rack audio in 7">
    <plug>inport 6</plug>
   </socket>
-  <socket exclusive="off" client="VCV Rack-01" type="jack-audio" name="VCV Rack audio in 8">
+  <socket exclusive="off" client="VCV Rack" type="jack-audio" name="VCV Rack audio in 8">
    <plug>inport 7</plug>
   </socket>
  </input-sockets>
