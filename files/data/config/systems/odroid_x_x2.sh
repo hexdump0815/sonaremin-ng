@@ -5,6 +5,8 @@ if [ "$?" = "0" ]; then
   cp /etc/X11/xorg.conf.d.samples/13-lima-exynos.conf /etc/X11/xorg.conf.d
   cp /etc/X11/xorg.conf.d.samples/15-swcursor.conf /etc/X11/xorg.conf.d
   cp /etc/X11/xorg.conf.d.samples/31-monitor-no-dpms.conf /etc/X11/xorg.conf.d
+  cp /etc/X11/xorg.conf.d.samples/13-lima-exynos.conf /etc/X11/xrdp
+  cp /etc/X11/xorg.conf.d.samples/15-swcursor.conf /etc/X11/xrdp
   # check if a custom audio setup exists and use it in that case
   if [ -f /data/config/custom/audio-setup.sh ]; then
     . /data/config/custom/audio-setup.sh

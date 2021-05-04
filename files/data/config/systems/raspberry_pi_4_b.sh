@@ -3,7 +3,6 @@ if [ "$?" = "0" ]; then
   # raspberry pi 4b
   cp /etc/X11/xorg.conf.d.samples/11-modesetting.conf /etc/X11/xorg.conf.d
   cp /etc/X11/xorg.conf.d.samples/13-glamor.conf /etc/X11/xorg.conf.d
-  cp /etc/X11/xorg.conf.d.samples/15-swcursor.conf /etc/X11/xorg.conf.d
   cp /etc/X11/xorg.conf.d.samples/31-monitor-no-dpms.conf /etc/X11/xorg.conf.d
   # check if a custom audio setup exists and use it in that case
   if [ -f /data/config/custom/audio-setup.sh ]; then
