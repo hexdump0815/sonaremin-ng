@@ -1,14 +1,10 @@
 grep -q 'Raspberry Pi 4 Model B$' /proc/device-tree/model
 if [ "$?" = "0" ]; then
   # raspberry pi 4b
-  if [ -d /opt/mesa-aarch64/lib/aarch64-linux-gnu ]; then
-    ln -sf /opt/mesa-aarch64/lib/aarch64-linux-gnu /opt/libgl
-    ln -sf /dev/null /opt/gl4es
-  else
-    ln -sf /opt/mesa-armv7l/lib/arm-linux-gnueabihf /opt/libgl
-    ln -sf /dev/null /opt/gl4es
-  fi
-  cp /data/config/x11/xorg.conf-modesetting /etc/X11/xorg.conf.d/xorg.conf
+  cp /etc/X11/xorg.conf.d.samples/11-modesetting.conf /etc/X11/xorg.conf.d
+  cp /etc/X11/xorg.conf.d.samples/13-glamor.conf /etc/X11/xorg.conf.d
+  cp /etc/X11/xorg.conf.d.samples/15-swcursor.conf /etc/X11/xorg.conf.d
+  cp /etc/X11/xorg.conf.d.samples/31-monitor-no-dpms.conf /etc/X11/xorg.conf.d
   # check if a custom audio setup exists and use it in that case
   if [ -f /data/config/custom/audio-setup.sh ]; then
     . /data/config/custom/audio-setup.sh
@@ -30,8 +26,4 @@ if [ "$?" = "0" ]; then
   echo DISABLE_CPU_CORES=\"\" >> /data/config/info.txt
   # change to vt8 before starting the x server
   echo CHVT="true" >> /data/config/info.txt
-  # set an extra LD_LIBRARY_PATH when starting the xserver and qjackctl
-  echo LDLP="/opt/libgl" >> /data/config/info.txt
-  # extra addition in front of the LD_LIBRARY_PATH when starting vcvrack
-  echo LDLP_PRE_EXTRA="/opt/gl4es" >> /data/config/info.txt
 fi
