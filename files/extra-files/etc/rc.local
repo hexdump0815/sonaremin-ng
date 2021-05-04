@@ -65,7 +65,7 @@ elif [ -f /lib/modules/`uname -r`/kernel/drivers/gpu/arm/mali/maligpu.ko ]; then
 fi
 
 rm -rf /opt/libgl
-rm -f /etc/X11/xorg.conf.d/xorg.conf
+rm -f /etc/X11/xorg.conf.d/1* /etc/X11/xorg.conf.d/3* /etc/X11/xorg.conf.d/5*
 
 for i in /data/config/systems/*.sh; do
   . $i
@@ -141,18 +141,18 @@ if [ ! -s /data/config/qjackctl/qjackctl-patchbay.xml ]; then
   cp /data/config/qjackctl/backup/qjackctl-patchbay.xml /data/config/qjackctl/qjackctl-patchbay.xml
 fi
 
-if [ "$SAMPLE_RATE" != "" ]; then
-  sed -i.backup-rc-local "s,\"sampleRate\":\ .*,\"sampleRate\": ${SAMPLE_RATE}.0\,,g" /data/config/vcvrack-v1/settings.json
-  sed -i.backup-rc-local "s,SampleRate=.*,SampleRate=$SAMPLE_RATE,g" /data/config/qjackctl/QjackCtl.conf
+if [ "$JACK_SAMPLE_RATE" != "" ]; then
+  sed -i.backup-rc-local "s,SampleRate=.*,SampleRate=$JACK_SAMPLE_RATE,g" /data/config/qjackctl/QjackCtl.conf
+fi
+
+if [ "$VCVRACK_SAMPLE_RATE" != "" ]; then
+  sed -i.backup-rc-local "s,\"sampleRate\":\ .*,\"sampleRate\": ${VCVRACK_SAMPLE_RATE}.0\,,g" /data/config/vcvrack-v1/settings.json
+fi
+
+if [ "$VCVRACK_DISABLE_CABLE_LIGHTS" = "yes" ]; then
+  sed -i.backup-rc-local "s,\"disableCableLights\":\ .*,\"disableCableLights\": true\,,g" /data/config/vcvrack-v1/settings.json
 else
-  # run low performance systems with 22.05 khz sample rate by default
-  if [ "$SYSTEM_MODEL" = "h3" ] || [ "$SYSTEM_MODEL" = "rk322x" ] || [ "$SYSTEM_MODEL" = "s805" ]; then
-    sed -i.backup-rc-local "s,\"sampleRate\":\ .*,\"sampleRate\": 22050.0\,,g" /data/config/vcvrack-v1/settings.json
-    sed -i.backup-rc-local "s,SampleRate=.*,SampleRate=22050,g" /data/config/qjackctl/QjackCtl.conf
-  else
-    sed -i.backup-rc-local "s,\"sampleRate\":\ .*,\"sampleRate\": 32000.0\,,g" /data/config/vcvrack-v1/settings.json
-    sed -i.backup-rc-local "s,SampleRate=.*,SampleRate=32000,g" /data/config/qjackctl/QjackCtl.conf
-  fi
+  sed -i.backup-rc-local "s,\"disableCableLights\":\ .*,\"disableCableLights\": false\,,g" /data/config/vcvrack-v1/settings.json
 fi
 
 if [ "$DISPLAY_MODE" = "display" ]; then
@@ -160,7 +160,7 @@ if [ "$DISPLAY_MODE" = "display" ]; then
   sed -i.backup-rc-local 's/"allowCursorLock": false,/"allowCursorLock": true,/g' /data/config/vcvrack-v1/settings.json
   systemctl start x11.service
 else
-  if [ "$SYSTEM_MODEL" = "raspberrypi" ]; then
+  if [ "$SYSTEM_MODEL" = "raspberrypi" ] || [ "$SYSTEM_MODEL" = "s905" ] || [ "$SYSTEM_MODEL" = "exynos4412" ]; then
     # put the proper hdmi port into the xorgxrdp config
     MY_HDMI=`ls /sys/class/drm | grep HDMI | head -n 1 | sed 's,.*HDMI,HDMI,g;s,-.-,-,g'`
     sed -i "s,Option \"monitor-HDMI.*,Option \"monitor-${MY_HDMI}\" \"${MY_HDMI}\",g;s,Identifier \"HDMI.*,Identifier \"${MY_HDMI}\",g" /etc/X11/xrdp/xorg.conf

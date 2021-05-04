@@ -15,7 +15,7 @@
           "deviceName": "system",
           "offset": 0,
           "maxChannels": 8,
-          "sampleRate": 32000,
+          "sampleRate": 44100,
           "blockSize": 256
         }
       },

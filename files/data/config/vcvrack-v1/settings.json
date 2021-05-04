@@ -14,7 +14,8 @@
   "cableTension": 0.5,
   "allowCursorLock": true,
   "realTime": false,
-  "sampleRate": 32000.0,
+  "keepPreviews": false,
+  "sampleRate": 22050.0,
   "threadCount": 2,
   "paramTooltip": false,
   "cpuMeter": false,
@@ -22,6 +23,8 @@
   "frameRateLimit": 5.0,
   "frameRateSync": false,
   "autosavePeriod": 60.0,
+  "pauseUnfocused": false,
+  "disableCableLights": true,
   "cableColors": [
     "#c9b70e",
     "#0c8e15",

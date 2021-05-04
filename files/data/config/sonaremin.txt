@@ -14,10 +14,6 @@ DISPLAY_MODE=display
 AUDIO_TUNE=yes
 #AUDIO_TUNE=no
 
-# samplerate used by jack and vcvrack
-# possible values: 22050, 32000 (default), 44100, 48000
-#SAMPLE_RATE="22050"
-
 # start qjackctl automatically
 QJACKCTL_START=yes
 #QJACKCTL_START=no
@@ -33,6 +29,10 @@ JACKD_NET_MIDI_OUT=4
 JACKD_NET_AUDIO_IN=2
 JACKD_NET_AUDIO_OUT=2
 
+# samplerate used by jack - not all will work for each sound card
+# possible values: 22050, 32000, 44100 (default), 48000
+JACK_SAMPLE_RATE="44100"
+
 # start rtpmidi server for midi over network
 #RTPMIDI=yes
 RTPMIDI=no
@@ -47,6 +47,14 @@ VCVRACK_START=yes
 
 # which vcvrack version to start automativally
 VCVRACK_VERSION=v1
+
+# samplerate used by vcvrack - lower results in less cpu usage
+# possible values: 22050 (default), 32000, 44100, 48000
+VCVRACK_SAMPLE_RATE="22050"
+
+# disable animated cable plug lights to save some cpu
+VCVRACK_DISABLE_CABLE_LIGHTS=no
+#VCVRACK_DISABLE_CABLE_LIGHTS=yes
 
 # set rt prio scheduling for vcvrack and jack a moment after starting them
 REALTIME_PRIORITY_V1=yes
