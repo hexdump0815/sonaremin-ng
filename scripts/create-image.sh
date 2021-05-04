@@ -159,7 +159,7 @@ fi
 
 # create a customized fstab file
 FSTAB_VFAT_BOOT="LABEL=BOOTPART /boot vfat defaults,uid=1000,gid=1000,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,showexec,utf8,flush 0 2"
-FSTAB_VFAT_DATA="LABEL=DATAPART /boot vfat defaults,uid=1000,gid=1000,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,showexec,utf8,flush 0 2"
+FSTAB_VFAT_DATA="LABEL=DATAPART /data vfat defaults,uid=1000,gid=1000,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,showexec,utf8,flush 0 2"
 FSTAB_BTRFS_ROOT="LABEL=rootpart / btrfs defaults,ssd,compress-force=zstd,noatime,nodiratime 0 1"
 FSTAB_EXT4_ROOT="LABEL=rootpart / ext4 defaults,noatime,nodiratime,errors=remount-ro 0 1"
 FSTAB_SWAP_FILE="/swap/file.0 none swap sw 0 0"
