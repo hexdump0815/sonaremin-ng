@@ -3,6 +3,6 @@
 #setenv ethaddr be-76-cd-88-a1-5a
 
 # call sysboot to use the boot options defined in /boot/menu/extlinux.conf
-sysboot mmc 0 fat 0x2000000 /menu/extlinux.conf
+sysboot mmc 0 fat ${scriptaddr} /menu/extlinux.conf
 
 # activate via: mkimage -A arm64 -T script -O linux -d boot.txt boot.scr
