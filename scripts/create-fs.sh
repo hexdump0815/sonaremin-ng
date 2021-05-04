@@ -100,9 +100,6 @@ if [ -d ${DOWNLOAD_DIR}/boot-extra-${1} ]; then
   cp -r ${DOWNLOAD_DIR}/boot-extra-${1}/* boot/extra
 fi
 
-# the sonaremin uses syslinux with /boot/menu as dir - so remove /boot/extlinux and add /boot/menu per system
-rm -rf boot/extlinux
-
 if [ -d ${IMAGEBUILDER}/files/extra-files ]; then
   ( cd ${IMAGEBUILDER}/files/extra-files ; tar cf - . ) | tar xhf -
 fi
@@ -127,6 +124,9 @@ fi
 if [ -d ${IMAGEBUILDER}/systems/${1}/extra-files-${2}-focal ]; then
   ( cd ${IMAGEBUILDER}/systems/${1}/extra-files-${2}-focal ; tar cf - . ) | tar xhf -
 fi
+
+# the sonaremin uses syslinux with /boot/menu as dir - so remove /boot/extlinux and add /boot/menu per system
+rm -rf boot/extlinux
 
 tar --numeric-owner -xzf ${S_DOWNLOAD_DIR}/opt-xrdp-focal-${2}.tar.gz
 # unpack this before the extra-files as they bring an adapted config
