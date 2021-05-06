@@ -94,6 +94,9 @@ cd ${S_BUILD_ROOT}/
 rm -f create-chroot-stage-0?.sh
 
 tar --numeric-owner -xhzf ${DOWNLOAD_DIR}/kernel-${1}-${2}.tar.gz
+if [ -f ${DOWNLOAD_DIR}/kernel-mali-${1}-${2}.tar.gz ]; then
+  tar --numeric-owner -xhzf ${DOWNLOAD_DIR}/kernel-mali-${1}-${2}.tar.gz
+fi
 
 if [ -d ${DOWNLOAD_DIR}/boot-extra-${1} ]; then
   mkdir -p boot/extra
@@ -134,6 +137,19 @@ tar --numeric-owner -xzf ${S_DOWNLOAD_DIR}/xorgxrdp-focal-${2}.tar.gz
 tar --numeric-owner -xzf ${S_DOWNLOAD_DIR}/opt-raveloxmidi-focal-${2}.tar.gz
 
 tar --numeric-owner -xzf ${DOWNLOAD_DIR}/opt-mesa-focal-${2}.tar.gz
+
+if [ -f ${DOWNLOAD_DIR}/opengl-${1}-${2}.tar.gz ]; then
+  tar --numeric-owner -xzf ${DOWNLOAD_DIR}/opengl-${1}-${2}.tar.gz
+fi
+if [ -f ${DOWNLOAD_DIR}/opengl-fbdev-${1}-${2}.tar.gz ]; then
+  tar --numeric-owner -xzf ${DOWNLOAD_DIR}/opengl-fbdev-${1}-${2}.tar.gz
+fi
+if [ -f ${DOWNLOAD_DIR}/opengl-wayland-${1}-${2}.tar.gz ]; then
+  tar --numeric-owner -xzf ${DOWNLOAD_DIR}/opengl-wayland-${1}-${2}.tar.gz
+fi
+if [ -f ${DOWNLOAD_DIR}/gl4es-${2}-${3}.tar.gz ]; then
+  tar --numeric-owner -xzf ${DOWNLOAD_DIR}/gl4es-${2}-${3}.tar.gz
+fi
 
 if [ -d ${WORKDIR}/files/extra-files ]; then
   ( cd ${WORKDIR}/files/extra-files ; tar cf - . ) | tar xhf -
