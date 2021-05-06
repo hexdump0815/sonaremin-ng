@@ -83,23 +83,23 @@ fi
 mkdir -p ${S_IMAGE_DIR}
 mkdir -p ${S_MOUNT_POINT}
 
-if [ -f ${S_IMAGE_DIR}/${1}-${2}.img ]; then
+if [ -f ${S_IMAGE_DIR}/sonaremin-${1}-${2}.img ]; then
   echo ""
-  echo "image file ${S_IMAGE_DIR}/${1}-${2}.img already exists - giving up for safety reasons ..."
+  echo "image file ${S_IMAGE_DIR}/sonaremin-${1}-${2}.img already exists - giving up for safety reasons ..."
   echo ""
   exit 1
 fi
 
 # we use less than the marketing capacity of the sd card as it is usually lower in reality: 7 of 8gb
-truncate -s 0 ${S_IMAGE_DIR}/${1}-${2}.img
+truncate -s 0 ${S_IMAGE_DIR}/sonaremin-${1}-${2}.img
 # the compressed btrfs root needs less space on disk
 if [ "$ROOTFS" = "btrfs" ]; then
-  fallocate -l 5G ${S_IMAGE_DIR}/${1}-${2}.img
+  fallocate -l 5G ${S_IMAGE_DIR}/sonaremin-${1}-${2}.img
 else
-  fallocate -l 7G ${S_IMAGE_DIR}/${1}-${2}.img
+  fallocate -l 7G ${S_IMAGE_DIR}/sonaremin-${1}-${2}.img
 fi
 
-losetup /dev/loop0 ${S_IMAGE_DIR}/${1}-${2}.img
+losetup /dev/loop0 ${S_IMAGE_DIR}/sonaremin-${1}-${2}.img
 
 if [ -f ${DOWNLOAD_DIR}/boot-${1}-${2}.dd ]; then
   dd if=${DOWNLOAD_DIR}/boot-${1}-${2}.dd of=/dev/loop0
@@ -111,7 +111,7 @@ fdisk /dev/loop0 < ${WORKDIR}/files/mbr-partitions.txt
 # this is to make sure we really use the new partition table and have all partitions around
 partprobe /dev/loop0
 losetup -d /dev/loop0
-losetup --partscan /dev/loop0 ${S_IMAGE_DIR}/${1}-${2}.img
+losetup --partscan /dev/loop0 ${S_IMAGE_DIR}/sonaremin-${1}-${2}.img
 
 # get partition mapping info
 . ${WORKDIR}/files/partition-mapping.txt
@@ -225,5 +225,5 @@ losetup -d /dev/loop0
 rmdir ${S_MOUNT_POINT}
 
 echo ""
-echo "the image is now ready at ${S_IMAGE_DIR}/${1}-${2}.img"
+echo "the image is now ready at ${S_IMAGE_DIR}/sonaremin-${1}-${2}.img"
 echo ""
