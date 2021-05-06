@@ -27,5 +27,5 @@ if [ "$?" = "0" ]; then
   # should be fine with 3 out of 4 cores for instance ... this is a space separated list
   echo DISABLE_CPU_CORES=\"1\" >> /data/config/info.txt
   # change to vt8 before starting the x server
-  echo CHVT="false" >> /data/config/info.txt
+  echo CHVT="true" >> /data/config/info.txt
 fi
