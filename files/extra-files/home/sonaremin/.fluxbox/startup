@@ -32,7 +32,9 @@ if [ "$(ps auxwww | grep /usr/bin/xpra | grep -v grep)" != "" ]; then
   fi
 
   # the xorgxrdp approach for mesa requires to set a proper resolution here now
-  if [ "$SYSTEM_MODEL" = "raspberrypi" ] || [ "$SYSTEM_MODEL" = "s905" ] || [ "$SYSTEM_MODEL" = "exynos4412" ]; then
+  if [ "$SYSTEM_MODEL" = "raspberrypi" ] || [ "$SYSTEM_MODEL" = "s905" ] || \
+     [ "$SYSTEM_MODEL" = "exynos4412" ] || [ "$SYSTEM_MODEL" = "h6" ] || \
+     [ "$SYSTEM_MODEL" = "rk3328" ]; then
     MY_HDMI=`ls /sys/class/drm | grep HDMI | head -n 1 | sed 's,.*HDMI,HDMI,g;s,-.-,-,g'`
     xrandr --output $MY_HDMI --mode 1024x768
     sleep 3
