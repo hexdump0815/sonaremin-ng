@@ -1,4 +1,4 @@
-grep -q 'Rockchip RK3318 BOX$' /proc/device-tree/model
+grep -q 'Rockchip RK33[1,2]8 BOX$' /proc/device-tree/model
 if [ "$?" = "0" ]; then
   # rockchip rk3328 tv box
   cp /etc/X11/xorg.conf.d.samples/11-modesetting.conf /etc/X11/xorg.conf.d
