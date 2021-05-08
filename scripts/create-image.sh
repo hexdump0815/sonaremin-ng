@@ -9,7 +9,7 @@ if [ -d `dirname $0`/../../imagebuilder-exp/systems ]; then
   export IMAGEBUILDER=`pwd`
 else
   echo ""
-  echo "please clone the experimental branch of"
+  echo "please clone the main branch of"
   echo "https://github.com/hexdump0815/imagebuilder"
   echo "`dirname $0`/../../imagebuilder-exp"
   echo ""
