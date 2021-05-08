@@ -162,7 +162,7 @@ if [ "$DISPLAY_MODE" = "display" ]; then
 else
   if [ "$SYSTEM_MODEL" = "raspberrypi" ] || [ "$SYSTEM_MODEL" = "s905" ] || \
      [ "$SYSTEM_MODEL" = "exynos4412" ] || [ "$SYSTEM_MODEL" = "h6" ] || \
-     [ "$SYSTEM_MODEL" = "rk3328" ]; then
+     [ "$SYSTEM_MODEL" = "rk3288" ] || [ "$SYSTEM_MODEL" = "rk3328" ]; then
     # put the proper hdmi port into the xorgxrdp config
     MY_HDMI=`ls /sys/class/drm | grep HDMI | head -n 1 | sed 's,.*HDMI,HDMI,g;s,-.-,-,g'`
     sed -i "s,Option \"monitor-HDMI.*,Option \"monitor-${MY_HDMI}\" \"${MY_HDMI}\",g;s,Identifier \"HDMI.*,Identifier \"${MY_HDMI}\",g" /etc/X11/xrdp/xorg.conf

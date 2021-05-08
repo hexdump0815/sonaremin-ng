@@ -16,7 +16,7 @@ cd /home/sonaremin
 
 if [ "$SYSTEM_MODEL" = "raspberrypi" ] || [ "$SYSTEM_MODEL" = "s905" ] || \
    [ "$SYSTEM_MODEL" = "exynos4412" ] || [ "$SYSTEM_MODEL" = "h6" ] || \
-   [ "$SYSTEM_MODEL" = "rk3328" ]; then
+   [ "$SYSTEM_MODEL" = "rk3288" ] || [ "$SYSTEM_MODEL" = "rk3328" ]; then
   # for the mesa case we use xorgxrdp instead of xvfb for xpra to get gpu acceleration
   xpra start-desktop :100 --start-child=startfluxbox --exit-with-children --xvfb="Xorg :10 vt7 -auth .Xauthority -config xrdp/xorg.conf -noreset -nolisten tcp" --start-via-proxy=no --systemd-run=no --file-transfer=no --printing=no --resize-display=no --mdns=no --pulseaudio=no --dbus-proxy=no --dbus-control=no --webcam=no --notifications=no > /tmp/start-xpra.log 2>&1
 else
