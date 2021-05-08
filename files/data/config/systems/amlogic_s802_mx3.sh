@@ -1,22 +1,17 @@
 grep -q 'Tronsmart MXIII$' /proc/device-tree/model
 if [ "$?" = "0" ]; then
   # mx3
+  cp /etc/X11/xorg.conf.d.samples/11-modesetting.conf /etc/X11/xorg.conf.d
+  cp /etc/X11/xorg.conf.d.samples/31-monitor-no-dpms.conf /etc/X11/xorg.conf.d
   if [ "$DISPLAY_MODE" = "display" ]; then
     # no hdmi or mali supported yet on this system, so use mesa software
     # opengl rendering (i.e. no mali and no gl4es) with max 1 thread and
     # switch display mode to virtual
     DISPLAY_MODE=virtual
-    ln -sf /dev/null /opt/libgl
-    ln -sf /dev/null /opt/gl4es
     export LP_NUM_THREADS=1
   else
-    # in cese we are not in display mode use mesa software opengl
-    # rendering (i.e. no mali and no gl4es) with max 1 thread
-    ln -sf /dev/null /opt/libgl
-    ln -sf /dev/null /opt/gl4es
     export LP_NUM_THREADS=1
   fi
-  cp /data/config/x11/xorg.conf-modesetting /etc/X11/xorg.conf.d/xorg.conf
   # check if a custom audio setup exists and use it in that case
   if [ -f /data/config/custom/audio-setup.sh ]; then
     . /data/config/custom/audio-setup.sh
@@ -39,6 +34,4 @@ if [ "$?" = "0" ]; then
   #echo DISABLE_CPU_CORES=\"1\" >> /data/config/info.txt
   # # change to vt8 before starting the x server
   # echo CHVT="true" >> /data/config/info.txt
-  # # extra addition in front of the LD_LIBRARY_PATH when starting vcvrack
-  # echo LDLP_PRE_EXTRA="/opt/gl4es" >> /data/config/info.txt
 fi
