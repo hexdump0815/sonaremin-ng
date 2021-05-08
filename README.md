@@ -1,2 +1,2 @@
 # sonaremin-ng
-sonaremin next generation :) - this is work in progress and does not work yet ...
+sonaremin next generation :) - until this README.md has been properly rewritten, please have a look at https://github.com/hexdump0815/sonaremin/blob/master/README.md
