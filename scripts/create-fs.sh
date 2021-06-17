@@ -236,23 +236,7 @@ cp ${WORKDIR}/files/empty-template.vcv vcvrack-v1/template.vcv
 cd ../..
 chown -R 1000:1000 home/sonaremin/
 
-export KERNEL_VERSION=`ls ${S_BUILD_ROOT}/boot/*Image-* | sed 's,.*Image-,,g' | sort -u`
-
-# hack to get the fsck binaries in properly even in out chroot env
-cp -f ${S_BUILD_ROOT}/usr/share/initramfs-tools/hooks/fsck ${S_BUILD_ROOT}/tmp/fsck.org
-sed -i 's,fsck_types=.*,fsck_types="vfat ext4",g' ${S_BUILD_ROOT}/usr/share/initramfs-tools/hooks/fsck
-chroot ${S_BUILD_ROOT} update-initramfs -c -k ${KERNEL_VERSION}
-mv -f ${S_BUILD_ROOT}/tmp/fsck.org ${S_BUILD_ROOT}/usr/share/initramfs-tools/hooks/fsck
-
 cd ${S_BUILD_ROOT}
-
-# post install script per system
-if [ -x ${IMAGEBUILDER}/systems/${1}/postinstall.sh ]; then
-  ${IMAGEBUILDER}/systems/${1}/postinstall.sh
-fi
-if [ -x ${IMAGEBUILDER}/systems/${1}/postinstall-focal.sh ]; then
-  ${IMAGEBUILDER}/systems/${1}/postinstall-focal.sh
-fi
 
 # add support for self built fresher mesa
 if [ "${2}" = "armv7l" ]; then
@@ -271,7 +255,23 @@ fi
 SONAREMIN_VERSION=$(cd ${WORKDIR}; git rev-parse --verify HEAD)
 echo ${1} ${2} sonaremin ${SONAREMIN_VERSION} > ${S_BUILD_ROOT}/etc/sonaremin-info
 
+# post install script per system
+if [ -x ${IMAGEBUILDER}/systems/${1}/postinstall.sh ]; then
+  ${IMAGEBUILDER}/systems/${1}/postinstall.sh
+fi
+if [ -x ${IMAGEBUILDER}/systems/${1}/postinstall-focal.sh ]; then
+  ${IMAGEBUILDER}/systems/${1}/postinstall-focal.sh
+fi
+
 chroot ${S_BUILD_ROOT} ldconfig
+
+export KERNEL_VERSION=`ls ${S_BUILD_ROOT}/boot/*Image-* | sed 's,.*Image-,,g' | sort -u`
+
+# hack to get the fsck binaries in properly even in out chroot env
+cp -f ${S_BUILD_ROOT}/usr/share/initramfs-tools/hooks/fsck ${S_BUILD_ROOT}/tmp/fsck.org
+sed -i 's,fsck_types=.*,fsck_types="vfat ext4",g' ${S_BUILD_ROOT}/usr/share/initramfs-tools/hooks/fsck
+chroot ${S_BUILD_ROOT} update-initramfs -c -k ${KERNEL_VERSION}
+mv -f ${S_BUILD_ROOT}/tmp/fsck.org ${S_BUILD_ROOT}/usr/share/initramfs-tools/hooks/fsck
 
 cd ${WORKDIR}
 
