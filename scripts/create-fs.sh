@@ -267,6 +267,10 @@ elif [ "${2}" = "aarch64" ]; then
   echo "/opt/mesa/lib/aarch64-linux-gnu" > etc/ld.so.conf.d/aaa-mesa.conf
 fi
 
+# add some sonaremin version info as /etc/sonaremin-info
+SONAREMIN_VERSION=$(cd ${WORKDIR}; git rev-parse --verify HEAD)
+echo ${1} ${2} sonaremin ${SONAREMIN_VERSION} > ${S_BUILD_ROOT}/etc/sonaremin-info
+
 chroot ${S_BUILD_ROOT} ldconfig
 
 cd ${WORKDIR}
