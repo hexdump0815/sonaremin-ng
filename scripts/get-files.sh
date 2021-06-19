@@ -26,7 +26,7 @@ mkdir -p $S_DOWNLOAD_DIR
 set -e
 
 # version info
-vcvrack_v1_release_version="v1.1.6_10"
+vcvrack_v1_release_version="v1.1.6_11"
 raveloxmidi_release_version="0.10.3"
 xrdp_release_version="0.9.16"
 xorgxrdp_release_version="0.2.16"
