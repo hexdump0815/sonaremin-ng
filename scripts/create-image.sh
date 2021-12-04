@@ -214,6 +214,22 @@ if [ "$1" = "amlogic_m8" ]; then
   ${S_MOUNT_POINT}/boot/shorten-filenames.sh
 fi
 
+# prepare for a complete chroot env partially needed by the following steps
+mount -o bind /dev ${MOUNT_POINT}/dev
+mount -o bind /dev/pts ${MOUNT_POINT}/dev/pts
+mount -t sysfs /sys ${MOUNT_POINT}/sys
+mount -t proc /proc ${MOUNT_POINT}/proc
+
+# finalize script which is run chrooted per system
+if [ -x ${IMAGEBUILDER}/systems/${1}/finalize-chroot.sh ]; then
+  cp ${IMAGEBUILDER}/systems/${1}/finalize-chroot.sh ${MOUNT_POINT}/finalize-chroot.sh
+  chroot ${MOUNT_POINT} /finalize-chroot.sh ${1} ${2} focal
+  rm -f ${MOUNT_POINT}/finalize-chroot.sh
+fi
+
+# umount all the extra stuff mounted for chroot usage as we are done with chroots now
+umount ${MOUNT_POINT}/proc ${MOUNT_POINT}/sys ${MOUNT_POINT}/dev/pts ${MOUNT_POINT}/dev
+
 df -h ${S_MOUNT_POINT} ${S_MOUNT_POINT}/boot
 umount ${S_MOUNT_POINT}/data 
 umount ${S_MOUNT_POINT}/boot 

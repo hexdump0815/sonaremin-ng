@@ -255,12 +255,26 @@ fi
 SONAREMIN_VERSION=$(cd ${WORKDIR}; git rev-parse --verify HEAD)
 echo ${1} ${2} sonaremin ${SONAREMIN_VERSION} > ${S_BUILD_ROOT}/etc/sonaremin-info
 
+# copy postinstall files into the build root if there are any
+if [ -d ${DOWNLOAD_DIR}/postinstall-${1} ]; then
+  cp -r ${DOWNLOAD_DIR}/postinstall-${1} ${BUILD_ROOT}/postinstall
+fi
+
 # post install script per system
 if [ -x ${IMAGEBUILDER}/systems/${1}/postinstall.sh ]; then
-  ${IMAGEBUILDER}/systems/${1}/postinstall.sh
+  ${IMAGEBUILDER}/systems/${1}/postinstall.sh ${1} ${2} focal
 fi
-if [ -x ${IMAGEBUILDER}/systems/${1}/postinstall-focal.sh ]; then
-  ${IMAGEBUILDER}/systems/${1}/postinstall-focal.sh
+
+# post install script which is run chrooted per system
+if [ -x ${IMAGEBUILDER}/systems/${1}/postinstall-chroot.sh ]; then
+  cp ${IMAGEBUILDER}/systems/${1}/postinstall-chroot.sh ${BUILD_ROOT}/postinstall-chroot.sh
+  chroot ${BUILD_ROOT} /postinstall-chroot.sh ${1} ${2} focal
+  rm -f ${BUILD_ROOT}/postinstall-chroot.sh
+fi
+
+# cleanup postinstall files
+if [ -d ${BUILD_ROOT}/postinstall ]; then
+  rm -rf ${BUILD_ROOT}/postinstall
 fi
 
 chroot ${S_BUILD_ROOT} ldconfig
