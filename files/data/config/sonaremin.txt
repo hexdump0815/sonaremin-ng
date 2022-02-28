@@ -41,22 +41,22 @@ RTPMIDI=no
 #SAMBA_SERVER=yes
 SAMBA_SERVER=no
 
-# start vcvrack automatically - you should either select this or the *thv1 below
-VCVRACK_START=yes
-#VCVRACK_START=no
+# start rack automatically
+RACK_START=yes
+#RACK_START=no
 
-# which vcvrack version to start automativally
-VCVRACK_VERSION=v1
+# which rack version to start automativally
+RACK_VERSION=v1
 
-# samplerate used by vcvrack - lower results in less cpu usage
+# samplerate used by rack - lower results in less cpu usage
 # possible values: 22050 (default), 32000, 44100, 48000
-VCVRACK_SAMPLE_RATE="22050"
+RACK_SAMPLE_RATE="22050"
 
 # disable animated cable plug lights to save some cpu
-VCVRACK_DISABLE_CABLE_LIGHTS=no
-#VCVRACK_DISABLE_CABLE_LIGHTS=yes
+RACK_DISABLE_CABLE_LIGHTS=no
+#RACK_DISABLE_CABLE_LIGHTS=yes
 
-# set rt prio scheduling for vcvrack and jack a moment after starting them
+# set rt prio scheduling for rack and jack a moment after starting them
 REALTIME_PRIORITY_V1=yes
 #REALTIME_PRIORITY_V1=no
 

@@ -118,11 +118,11 @@ fi
 # HAS_OVERLAYROOT is 0 if overlayroot is in place
 df | grep -q overlayroot
 HAS_OVERLAYROOT=$?
-if [ -f /home/sonaremin/vcvrack-v1/Rack ]; then
+if [ -f /home/sonaremin/rack-v1/Rack ]; then
   if [ "$HAS_OVERLAYROOT" = "0" ]; then
-    overlayroot-chroot setcap cap_sys_nice+ep /home/sonaremin/vcvrack-v1/Rack
+    overlayroot-chroot setcap cap_sys_nice+ep /home/sonaremin/rack-v1/Rack
   else
-    setcap cap_sys_nice+ep /home/sonaremin/vcvrack-v1/Rack
+    setcap cap_sys_nice+ep /home/sonaremin/rack-v1/Rack
   fi
 fi
 
@@ -134,8 +134,8 @@ ldconfig
 
 # better use a fresh copy of some files if their size is zero as they
 # might have gotten corrupted on an unclean shutdown maybe
-if [ ! -s /data/config/vcvrack-v1/settings.json ]; then
-  cp /data/config/vcvrack-v1/backup/settings.json /data/config/vcvrack-v1/settings.json
+if [ ! -s /data/config/rack-v1/settings.json ]; then
+  cp /data/config/rack-v1/backup/settings.json /data/config/rack-v1/settings.json
 fi
 if [ ! -s /data/config/qjackctl/qjackctl-patchbay.xml ]; then
   cp /data/config/qjackctl/backup/qjackctl-patchbay.xml /data/config/qjackctl/qjackctl-patchbay.xml
@@ -145,19 +145,19 @@ if [ "$JACK_SAMPLE_RATE" != "" ]; then
   sed -i.backup-rc-local "s,SampleRate=.*,SampleRate=$JACK_SAMPLE_RATE,g" /data/config/qjackctl/QjackCtl.conf
 fi
 
-if [ "$VCVRACK_SAMPLE_RATE" != "" ]; then
-  sed -i.backup-rc-local "s,\"sampleRate\":\ .*,\"sampleRate\": ${VCVRACK_SAMPLE_RATE}.0\,,g" /data/config/vcvrack-v1/settings.json
+if [ "$RACK_SAMPLE_RATE" != "" ]; then
+  sed -i.backup-rc-local "s,\"sampleRate\":\ .*,\"sampleRate\": ${RACK_SAMPLE_RATE}.0\,,g" /data/config/rack-v1/settings.json
 fi
 
-if [ "$VCVRACK_DISABLE_CABLE_LIGHTS" = "yes" ]; then
-  sed -i.backup-rc-local "s,\"disableCableLights\":\ .*,\"disableCableLights\": true\,,g" /data/config/vcvrack-v1/settings.json
+if [ "$RACK_DISABLE_CABLE_LIGHTS" = "yes" ]; then
+  sed -i.backup-rc-local "s,\"disableCableLights\":\ .*,\"disableCableLights\": true\,,g" /data/config/rack-v1/settings.json
 else
-  sed -i.backup-rc-local "s,\"disableCableLights\":\ .*,\"disableCableLights\": false\,,g" /data/config/vcvrack-v1/settings.json
+  sed -i.backup-rc-local "s,\"disableCableLights\":\ .*,\"disableCableLights\": false\,,g" /data/config/rack-v1/settings.json
 fi
 
 if [ "$DISPLAY_MODE" = "display" ]; then
   # set back cursor lock mode
-  sed -i.backup-rc-local 's/"allowCursorLock": false,/"allowCursorLock": true,/g' /data/config/vcvrack-v1/settings.json
+  sed -i.backup-rc-local 's/"allowCursorLock": false,/"allowCursorLock": true,/g' /data/config/rack-v1/settings.json
   systemctl start x11.service
 else
   if [ "$SYSTEM_MODEL" = "raspberrypi" ] || [ "$SYSTEM_MODEL" = "s905" ] || \
@@ -170,7 +170,7 @@ else
   if [ -x /home/sonaremin/bin/start-xpra.sh ]; then
     # disable cursor lock mode to make virtual mode less sluggish
     # especially the scroll bars are very hard to use otherwise
-    sed -i.backup-rc-local 's/"allowCursorLock": true,/"allowCursorLock": false,/g' /data/config/vcvrack-v1/settings.json
+    sed -i.backup-rc-local 's/"allowCursorLock": true,/"allowCursorLock": false,/g' /data/config/rack-v1/settings.json
     su -c /home/sonaremin/bin/start-xpra.sh sonaremin
   fi
 fi

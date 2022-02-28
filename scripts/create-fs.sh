@@ -216,23 +216,23 @@ cd ${S_BUILD_ROOT}/data
 cp -r ${WORKDIR}/files/data/* .
 # rk322x is too slow for the usual default patch
 if [ "$1" = "rockchip_rk322x" ]; then
-  cp vcvrack-v1/generative-02.vcv vcvrack-v1/sonaremin.vcv
+  cp rack-v1/generative-02.vcv rack-v1/sonaremin.vcv
 fi
-cp -f vcvrack-v1/sonaremin.vcv config/vcvrack-v1/autosave.vcv
+cp -f rack-v1/sonaremin.vcv config/rack-v1/autosave.vcv
 mkdir -p config/qjackctl/backup
-mkdir -p myfiles/vcvrack-v1
+mkdir -p myfiles/rack-v1
 cp config/qjackctl/qjackctl-patchbay.xml config/qjackctl/backup
-mkdir -p config/vcvrack-v1/backup
-cp config/vcvrack-v1/settings.json config/vcvrack-v1/backup/settings.json 
+mkdir -p config/rack-v1/backup
+cp config/rack-v1/settings.json config/rack-v1/backup/settings.json 
 
 cd ${S_BUILD_ROOT}
 cd home/sonaremin
-tar --numeric-owner -xzf ${S_DOWNLOAD_DIR}/vcvrack.${2}-v1.tar.gz
-mv vcvrack.${2}-v1 vcvrack-v1
-rm -f vcvrack-v1/settings.json vcvrack-v1/autosave.vcv vcvrack-v1/template.vcv
-ln -s /data/config/vcvrack-v1/settings.json vcvrack-v1/settings.json
-cp -f ${S_BUILD_ROOT}/data/config/vcvrack-v1/autosave.vcv vcvrack-v1/autosave.vcv
-cp ${WORKDIR}/files/empty-template.vcv vcvrack-v1/template.vcv
+tar --numeric-owner -xzf ${S_DOWNLOAD_DIR}/rack.${2}-v1.tar.gz
+mv rack.${2}-v1 rack-v1
+rm -f rack-v1/settings.json rack-v1/autosave.vcv rack-v1/template.vcv
+ln -s /data/config/rack-v1/settings.json rack-v1/settings.json
+cp -f ${S_BUILD_ROOT}/data/config/rack-v1/autosave.vcv rack-v1/autosave.vcv
+cp ${WORKDIR}/files/empty-template.vcv rack-v1/template.vcv
 cd ../..
 chown -R 1000:1000 home/sonaremin/
 

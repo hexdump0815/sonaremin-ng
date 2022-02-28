@@ -22,7 +22,7 @@ if [ "$?" = "0" ]; then
   # limit the cpu clock to avoid overheating
   # possible values: cat /sys/devices/system/cpu/cpufreq/policy?/scaling_available_frequencies
   #echo MAX_CPU_CLOCK=1608000 >> /data/config/info.txt
-  # set the cpu cores vcvrack and jack should run on - we avoid cpu0 as it has to deal
+  # set the cpu cores rack and jack should run on - we avoid cpu0 as it has to deal
   # more with irq handling etc. - used in set-rtprio-and-cpu-affinity.sh
   echo DESIRED_CPU_AFFINITY=4,5 >> /data/config/info.txt
   echo DESIRED_CPU_AFFINITY_JACK=1 >> /data/config/info.txt
@@ -31,7 +31,7 @@ if [ "$?" = "0" ]; then
   echo DISABLE_CPU_CORES=\"2 3 6 7\" >> /data/config/info.txt
   # change to vt8 before starting the x server
   echo CHVT="true" >> /data/config/info.txt
-  # extra addition in front of the LD_LIBRARY_PATH when starting vcvrack
+  # extra addition in front of the LD_LIBRARY_PATH when starting rack
   echo LDLP_PRE_EXTRA="/opt/gl4es" >> /data/config/info.txt
   # gl4es mode - this allows mali gpu accel even with xpra in virtual mode
   echo LIBGL_FB=3 >> /data/config/info.txt

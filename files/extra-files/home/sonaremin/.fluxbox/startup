@@ -56,7 +56,7 @@ else
 fi
 
 /home/sonaremin/bin/start-qjackctl.sh &
-/home/sonaremin/bin/start-vcvrack.sh &
+/home/sonaremin/bin/start-rack.sh &
 /home/sonaremin/bin/start-local.sh &
 
 # And last but not least we start fluxbox.

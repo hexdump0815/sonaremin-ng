@@ -19,7 +19,7 @@ if [ "$?" = "0" ]; then
   # limit the cpu clock to avoid overheating
   # possible values: cat /sys/devices/system/cpu/cpufreq/policy?/scaling_available_frequencies
   #echo MAX_CPU_CLOCK=1608000 >> /data/config/info.txt
-  # set the cpu cores vcvrack and jack should run on - we avoid cpu0 as it has to deal
+  # set the cpu cores rack and jack should run on - we avoid cpu0 as it has to deal
   # more with irq handling etc. - used in set-rtprio-and-cpu-affinity.sh
   echo DESIRED_CPU_AFFINITY=2,3 >> /data/config/info.txt
   echo DESIRED_CPU_AFFINITY_JACK=0 >> /data/config/info.txt

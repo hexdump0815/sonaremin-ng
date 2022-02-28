@@ -26,18 +26,18 @@ mkdir -p $S_DOWNLOAD_DIR
 set -e
 
 # version info
-vcvrack_v1_release_version="v1.1.6_11"
+rack_v1_release_version="v1.1.6_16"
 raveloxmidi_release_version="0.10.3"
 xrdp_release_version="0.9.16"
 xorgxrdp_release_version="0.2.16"
 
-# get precompiled vcvrack
+# get precompiled rack
 if [ "$1" = "all" ] || [ "$1" = "armv7l" ]; then
-  wget https://github.com/hexdump0815/vcvrack-dockerbuild-v1/releases/download/${vcvrack_v1_release_version}/vcvrack.armv7l-v1.tar.gz -O ${S_DOWNLOAD_DIR}/vcvrack.armv7l-v1.tar.gz
+  wget https://github.com/hexdump0815/vcvrack-dockerbuild-v1/releases/download/${rack_v1_release_version}/rack.armv7l-v1.tar.gz -O ${S_DOWNLOAD_DIR}/rack.armv7l-v1.tar.gz
 fi
 
 if [ "$1" = "all" ] || [ "$1" = "aarch64" ]; then
-  wget https://github.com/hexdump0815/vcvrack-dockerbuild-v1/releases/download/${vcvrack_v1_release_version}/vcvrack.aarch64-v1.tar.gz -O ${S_DOWNLOAD_DIR}/vcvrack.aarch64-v1.tar.gz
+  wget https://github.com/hexdump0815/vcvrack-dockerbuild-v1/releases/download/${rack_v1_release_version}/rack.aarch64-v1.tar.gz -O ${S_DOWNLOAD_DIR}/rack.aarch64-v1.tar.gz
 fi
 
 # get precompiled raveloxmidi

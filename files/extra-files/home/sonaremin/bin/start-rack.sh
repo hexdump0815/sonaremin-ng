@@ -6,7 +6,7 @@ if [ -f /data/config/info.txt ]; then
     export LIBGL_FB
   fi
 else
-  # extra addition in front of the LD_LIBRARY_PATH when starting vcvrack
+  # extra addition in front of the LD_LIBRARY_PATH when starting rack
   LDLP_PRE_EXTRA=""
 fi
 
@@ -21,17 +21,17 @@ else
   # start qjackctl automatically
   QJACKCTL_START=yes
   #QJACKCTL_START=no
-  # start vcvrack automatically
-  VCVRACK_START=yes
-  #VCVRACK_START=no
-  # which vcvrack version to start automativally
-  VCVRACK_VERSION=v1
+  # start rack automatically
+  RACK_START=yes
+  #RACK_START=no
+  # which rack version to start automativally
+  RACK_VERSION=v1
 fi
 
-VCVRACK_PID=`pidof Rack`
-if { [ "$QJACKCTL_START" = "yes" ] && [ "$VCVRACK_START" = "yes" ] && [ "$VCVRACK_PID" = "" ]; } \
-    || { [ "$1" = "menu" ] && [ "$VCVRACK_PID" = "" ]; }; then
-  export VCVRACK_VERSION
+RACK_PID=`pidof Rack`
+if { [ "$QJACKCTL_START" = "yes" ] && [ "$RACK_START" = "yes" ] && [ "$RACK_PID" = "" ]; } \
+    || { [ "$1" = "menu" ] && [ "$RACK_PID" = "" ]; }; then
+  export RACK_VERSION
   if [ "$DISPLAY_MODE" != "virtual" ] || [ "$DISPLAY_MODE" != "headless" ]; then
     if [ "$LDLP_PRE_EXTRA" = "" ]; then
       export LD_LIBRARY_PATH=/opt/libgl
@@ -39,7 +39,7 @@ if { [ "$QJACKCTL_START" = "yes" ] && [ "$VCVRACK_START" = "yes" ] && [ "$VCVRAC
   else
     export LD_LIBRARY_PATH="/opt/gl4es:/opt/libgl"
   fi
-  cd /home/sonaremin/vcvrack-${VCVRACK_VERSION}
+  cd /home/sonaremin/rack-${RACK_VERSION}
   sync
   sleep 5
   sync
