@@ -20,17 +20,15 @@ if [ ! -d ${S_DOWNLOAD_DIR} ]; then
   exit 1
 fi
 
-if [ -d `dirname $0`/../../imagebuilder-exp/systems ]; then
+if [ -d ${WORKDIR}/../imagebuilder/systems ]; then
   # path to the cloned imagebuilder framework
-  cd `dirname $0`/../../imagebuilder-exp
+  cd ${WORKDIR}/../imagebuilder
   export IMAGEBUILDER=`pwd`
 else
   echo ""
-  echo "please clone the main branch of"
-  echo "https://github.com/hexdump0815/imagebuilder"
-  echo "`dirname $0`/../../imagebuilder-exp"
+  echo "please clone the main branch of https://github.com/hexdump0815/imagebuilder to ${WORKDIR}/../imagebuilder first"
   echo ""
-  echo "giving up"
+  echo "giving up for now"
   echo ""
   exit 1
 fi
@@ -43,7 +41,7 @@ export DOWNLOAD_DIR=/compile/local/imagebuilder-download
 
 if [ ! -d ${DOWNLOAD_DIR} ]; then
   echo ""
-  echo "download dir ${DOWNLOAD_DIR} does not exists - please run ${IMAGEBUILDER}/scripts/get-files.sh first ..."
+  echo "download dir ${DOWNLOAD_DIR} does not exists - please run \"${IMAGEBUILDER}/scripts/get-files.sh $1 $2 focal\" first ... then rerun this script as you just did"
   echo ""
   exit 1
 fi
@@ -257,7 +255,7 @@ echo ${1} ${2} sonaremin ${SONAREMIN_VERSION} > ${S_BUILD_ROOT}/etc/sonaremin-in
 
 # copy postinstall files into the build root if there are any
 if [ -d ${DOWNLOAD_DIR}/postinstall-${1} ]; then
-  cp -r ${DOWNLOAD_DIR}/postinstall-${1} ${BUILD_ROOT}/postinstall
+  cp -r ${DOWNLOAD_DIR}/postinstall-${1} ${S_BUILD_ROOT}/postinstall
 fi
 
 # post install script per system
@@ -267,14 +265,14 @@ fi
 
 # post install script which is run chrooted per system
 if [ -x ${IMAGEBUILDER}/systems/${1}/postinstall-chroot.sh ]; then
-  cp ${IMAGEBUILDER}/systems/${1}/postinstall-chroot.sh ${BUILD_ROOT}/postinstall-chroot.sh
-  chroot ${BUILD_ROOT} /postinstall-chroot.sh ${1} ${2} focal
-  rm -f ${BUILD_ROOT}/postinstall-chroot.sh
+  cp ${IMAGEBUILDER}/systems/${1}/postinstall-chroot.sh ${S_BUILD_ROOT}/postinstall-chroot.sh
+  chroot ${S_BUILD_ROOT} /postinstall-chroot.sh ${1} ${2} focal
+  rm -f ${S_BUILD_ROOT}/postinstall-chroot.sh
 fi
 
 # cleanup postinstall files
-if [ -d ${BUILD_ROOT}/postinstall ]; then
-  rm -rf ${BUILD_ROOT}/postinstall
+if [ -d ${S_BUILD_ROOT}/postinstall ]; then
+  rm -rf ${S_BUILD_ROOT}/postinstall
 fi
 
 chroot ${S_BUILD_ROOT} ldconfig
